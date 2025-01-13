@@ -8,7 +8,12 @@ class DetailsScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _CustomAppBar()
+          _CustomAppBar(),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Text('Prueba numero 1'),
+            ]),
+          )
         ],
       )
     );
@@ -43,3 +48,4 @@ class _CustomAppBar extends StatelessWidget {
     );
   }
 }
+
