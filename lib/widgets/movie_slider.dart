@@ -7,8 +7,7 @@ class MovieSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 350,
-      color: Colors.red,
+      height: 315,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -41,23 +40,29 @@ class _MoviePoster extends StatelessWidget {
     return Container(
       width: 130,
       height: 190,
-      color: Colors.blue,
       margin: const EdgeInsets.symmetric( horizontal: 10),
       child: Column(
         children: [
           // Cartel
-          FadeInImage(
-            placeholder: AssetImage('assets/no-image.jpg'), 
-            image: NetworkImage('https://i.pinimg.com/736x/bb/29/49/bb2949699f2fb63a09a1dc234989657a.jpg'),
-            width: 130,
-            height: 190,
-            fit: BoxFit.cover
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, 'details', arguments: 'movie-instance'),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: AssetImage('assets/no-image.jpg'), 
+                image: NetworkImage('https://i.pinimg.com/736x/bb/29/49/bb2949699f2fb63a09a1dc234989657a.jpg'),
+                width: 130,
+                height: 190,
+                fit: BoxFit.cover
+                ),
             ),
-
+          ),
+          SizedBox( height: 8),
           // Titulo
           Text('Star Wars: Episodio IV Una nueva esperanza',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
           )
         ],
       ),
