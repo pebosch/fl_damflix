@@ -22,16 +22,43 @@ class MovieSlider extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: 10,
               itemBuilder: (context, index){
-                return Container(
-                  width: 150,
-                  height: 100,
-                  color: Colors.blue,
-                  margin: const EdgeInsets.all(10),
-                );
+                return _MoviePoster();
               }
             ),
           )
           
+        ],
+      ),
+    );
+  }
+}
+
+class _MoviePoster extends StatelessWidget {
+  const _MoviePoster({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 130,
+      height: 190,
+      color: Colors.blue,
+      margin: const EdgeInsets.symmetric( horizontal: 10),
+      child: Column(
+        children: [
+          // Cartel
+          FadeInImage(
+            placeholder: AssetImage('assets/no-image.jpg'), 
+            image: NetworkImage('https://i.pinimg.com/736x/bb/29/49/bb2949699f2fb63a09a1dc234989657a.jpg'),
+            width: 130,
+            height: 190,
+            fit: BoxFit.cover
+            ),
+
+          // Titulo
+          Text('Star Wars: Episodio IV Una nueva esperanza',
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          )
         ],
       ),
     );
