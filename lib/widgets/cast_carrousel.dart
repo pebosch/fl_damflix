@@ -8,7 +8,6 @@ class CastCarrousel extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 180,
-      color: Colors.green,
       child: ListView.builder(
         itemCount: 10,
         scrollDirection: Axis.horizontal,
@@ -29,7 +28,6 @@ class _CastCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 10),
       width: 110,
       height: 110,
-      color: Colors.red,
       child: Column(
         children: [
           ClipRRect(
@@ -37,10 +35,18 @@ class _CastCard extends StatelessWidget {
             child: FadeInImage(
               placeholder: AssetImage('assets/no-image.jpg'), 
               image: NetworkImage('https://static.wikia.nocookie.net/esstarwars/images/2/29/Harrisonford.jpg'),
-              height: 140,
+              height: 120,
               width: 100,
               fit: BoxFit.cover,
             ),
+          ),
+
+          SizedBox( height: 10,),
+
+          Text('actor.nombre Harrison Ford',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
           )
         ],
       ),
