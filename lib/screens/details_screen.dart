@@ -1,3 +1,4 @@
+import 'package:fl_damflix/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -12,7 +13,9 @@ class DetailsScreen extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate([
               //Text('Prueba numero 1'),
-              _InfoPelicula()
+              _InfoPelicula(),
+              _Overview(),
+              CastCarrousel()
             ]),
           )
         ],
@@ -72,21 +75,34 @@ class _InfoPelicula extends StatelessWidget {
           SizedBox( width: 20,),
 
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('pelicula.titulo'),
-              Text('pelicula.year'),
-              Text('pelicula.director'),
+              Text('pelicula.titulo', style: Theme.of(context).textTheme.titleLarge, overflow: TextOverflow.ellipsis, maxLines: 2,),
+              Text('pelicula.year', style: Theme.of(context).textTheme.titleSmall,),
+              Text('pelicula.director', style: Theme.of(context).textTheme.titleSmall,),
               
               Row(
                 children: [
                   Icon(Icons.star, size: 25, color: Colors.yellow),
-                  Text('pelicula.valoracion')
+                  Text('pelicula.valoracion', style: Theme.of(context).textTheme.titleSmall,)
                 ],
               )
             ],
           )
         ],
       ),
+    );
+  }
+}
+
+class _Overview extends StatelessWidget {
+  const _Overview({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Text('Ipsum eiusmod deserunt pariatur pariatur proident ex nostrud laborum commodo consectetur duis proident Lorem. Ex sunt occaecat commodo dolore sit qui irure irure fugiat quis. Nostrud laborum irure eu reprehenderit sunt aliquip nostrud laborum qui sunt consequat. Excepteur est ullamco do non cillum irure aliqua. Elit consectetur aliquip consectetur aliquip velit irure ad laboris officia sint occaecat. Excepteur et velit do cupidatat labore qui deserunt eiusmod id nulla consectetur.', textAlign: TextAlign.justify, style: Theme.of(context).textTheme.titleSmall,),
     );
   }
 }
