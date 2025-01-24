@@ -76,6 +76,13 @@ class Result {
     double voteAverage;
     int voteCount;
 
+    get fullPosterImg {
+    if( this.posterPath != null )
+      return 'https://image.tmdb.org/t/p/w500/${this.posterPath}';
+      
+    return 'https://workingat.vu.nl/static/images/placeholder-image.jpg';
+    }
+
     Result({
         required this.adult,
         required this.backdropPath,

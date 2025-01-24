@@ -12,6 +12,15 @@ class CardSwiper extends StatelessWidget {
 
     final size = MediaQuery.of(context).size;
 
+    if( this.movies.length == 0){
+      return Container(
+        width: double.infinity,
+        height: size.height *0.5,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Container(
       width: double.infinity,
       height: size.height * 0.5,
@@ -23,13 +32,15 @@ class CardSwiper extends StatelessWidget {
         itemWidth: size.width*0.6,
         itemHeight: size.height*0.9,
         itemBuilder: (context, index) {
+          final movie = movies[index];
+          print( movie.posterPath);
           return GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'details', arguments: 'movie-instance'),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'), 
-                image: NetworkImage('https://i.pinimg.com/originals/f4/d7/24/f4d72491c0366c61b1d24912bc0a8079.png'),
+                image: NetworkImage(movie.fullPosterImg),
                 fit: BoxFit.cover,
               ),
             ),
