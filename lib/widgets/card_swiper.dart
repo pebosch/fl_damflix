@@ -1,8 +1,11 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:fl_damflix/models/models.dart';
 import 'package:flutter/material.dart';
 
 class CardSwiper extends StatelessWidget {
-  const CardSwiper({super.key});
+  const CardSwiper({super.key, required this.movies});
+
+  final List<Result> movies;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class CardSwiper extends StatelessWidget {
       //color: Colors.red,
       padding: const EdgeInsets.all(30),
       child: Swiper(
-        itemCount: 10,
+        itemCount: movies.length,
         layout: SwiperLayout.STACK,
         itemWidth: size.width*0.6,
         itemHeight: size.height*0.9,
