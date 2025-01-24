@@ -79,7 +79,8 @@ class Result {
     get fullPosterImg {
     if( this.posterPath != null )
       return 'https://image.tmdb.org/t/p/w500/${this.posterPath}';
-      
+      ///https://image.tmdb.org/t/p/w500/dOpSxmD3FWfl6SK8SLXw9uwcO05.jpg
+
     return 'https://workingat.vu.nl/static/images/placeholder-image.jpg';
     }
 
