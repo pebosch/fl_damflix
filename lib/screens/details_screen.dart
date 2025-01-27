@@ -91,7 +91,7 @@ class _InfoPelicula extends StatelessWidget {
             children: [
               Text(
                 movie.title, // Muestra el título de la película
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.titleMedium,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
