@@ -1,7 +1,11 @@
+import 'package:fl_damflix/models/models.dart';
 import 'package:flutter/material.dart';
 
 class MovieSlider extends StatelessWidget {
-  const MovieSlider({super.key});
+
+  final List<Result> movies;
+
+  const MovieSlider({super.key, required this.movies});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +23,9 @@ class MovieSlider extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: movies.length,
               itemBuilder: (context, index){
-                return _MoviePoster();
+                return _MoviePoster( movie: movies[index]);
               }
             ),
           )
@@ -33,7 +37,10 @@ class MovieSlider extends StatelessWidget {
 }
 
 class _MoviePoster extends StatelessWidget {
-  const _MoviePoster({super.key});
+
+  final Result movie;
+
+  const _MoviePoster({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +57,7 @@ class _MoviePoster extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'), 
-                image: NetworkImage('https://i.pinimg.com/736x/bb/29/49/bb2949699f2fb63a09a1dc234989657a.jpg'),
+                image: NetworkImage( movie.fullPosterImg ),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover
@@ -59,7 +66,8 @@ class _MoviePoster extends StatelessWidget {
           ),
           SizedBox( height: 8),
           // Titulo
-          Text('Star Wars: Episodio IV Una nueva esperanza',
+          Text(
+          movie.title,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
