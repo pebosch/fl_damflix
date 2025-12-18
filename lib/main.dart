@@ -1,5 +1,5 @@
-import 'package:fl_damflix/screens/details_screen.dart';
-import 'package:fl_damflix/screens/home_screen.dart';
+import 'package:fl_damflix/screens/screens.dart';
+import 'package:fl_damflix/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         'home':(context) => HomeScreen(),
         'details':(context) => DetailsScreen()
       },
+      theme: AppTheme.lightTheme
     );
   }
 }
