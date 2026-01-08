@@ -8,7 +8,13 @@ class DetailsScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _CustomAppBar()
+          _CustomAppBar(),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              //Text('Probandoooooo')
+              _InfoPelicula()
+            ])
+          )
         ],
       )
     );
@@ -42,6 +48,37 @@ class _CustomAppBar extends StatelessWidget {
           image: NetworkImage('https://pics.filmaffinity.com/star_wars_episode_v_the_empire_strikes_back-376120908-large.jpg')
         ),
       ),
+    );
+  }
+}
+
+class _InfoPelicula extends StatelessWidget {
+  const _InfoPelicula({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only( top: 20),
+      padding: EdgeInsets.symmetric( horizontal: 20),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/no-image.jpg'), 
+              image: NetworkImage('https://pics.filmaffinity.com/star_wars_episode_v_the_empire_strikes_back-701818523-large.jpg'),
+              height: 150,
+            ),
+          ),
+
+          Column(
+            children: [
+              Text('Vamos por aquí')
+            ],
+          )
+        ],
+      ),
+
     );
   }
 }
