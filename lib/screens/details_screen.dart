@@ -1,3 +1,4 @@
+import 'package:fl_damflix/widgets/cast_carrousel.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -14,6 +15,7 @@ class DetailsScreen extends StatelessWidget {
               //Text('Probandoooooo')
               _InfoPelicula(),
               _Overview(),
+              CastCarrousel()
             ])
           )
         ],
