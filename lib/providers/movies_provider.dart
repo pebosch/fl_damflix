@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,6 +24,8 @@ String _languaje = 'es-ES';
     );
     var response = await http.get(url);
 
-    print( response.body );
+    final Map<String, dynamic> decodeData = json.decode( response.body );
+
+    print( decodeData['results'][0] );
   }
 }
