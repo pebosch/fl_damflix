@@ -1,10 +1,16 @@
+import 'package:fl_damflix/models/models.dart';
 import 'package:flutter/material.dart';
 
 class MovieSlider extends StatelessWidget {
-  const MovieSlider({super.key});
+  const MovieSlider({super.key, required this.popularMovies});
+  final List<Result> popularMovies;
 
   @override
   Widget build(BuildContext context) {
+
+    if (this.popularMovies.length == 0) {
+      return Container(child: Center(child: CircularProgressIndicator(),),);
+    }
     return Container(
       width: double.infinity,
       height: 275,
@@ -20,9 +26,10 @@ class MovieSlider extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 20,
+              itemCount: popularMovies.length,
               itemBuilder: (context, index) {
-                return _MoviePoster();
+                final movie = popularMovies[index];
+                return _MoviePoster(movie: movie,);
               }
             ),
           ),
@@ -35,7 +42,8 @@ class MovieSlider extends StatelessWidget {
 }
 
 class _MoviePoster extends StatelessWidget {
-  const _MoviePoster({super.key});
+  const _MoviePoster({super.key, required this.movie});
+  final Result movie;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +60,7 @@ class _MoviePoster extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'), 
-                image: NetworkImage('https://pics.filmaffinity.com/star_wars_episode_v_the_empire_strikes_back-701818523-large.jpg'),
+                image: NetworkImage(movie.fullPosterImg),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,
@@ -61,7 +69,7 @@ class _MoviePoster extends StatelessWidget {
           ),
           SizedBox( height: 5,),
           Text(
-            'La guerra de las galaxias. Episodio V: El imperio contraataca (1980)',
+            movie.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

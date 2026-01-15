@@ -10,12 +10,13 @@ String _baseUrl = 'api.themoviedb.org';
 String _languaje = 'es-ES';
 
 List <Result> onDisplayMovies = [];
+List <Result> popularMovies = [];
 
   MoviesProvider() {
     print('MoviesProvider ha sido inicializado');
 
     this.getOnDisplayMovies();
-
+    this.getPopularMovies();
   }
 
   getOnDisplayMovies() async {
@@ -35,5 +36,23 @@ List <Result> onDisplayMovies = [];
 
     notifyListeners();
 
+  }
+
+  getPopularMovies() async {
+    var url = Uri.https(_baseUrl, '/3/movie/popular', {
+      'api_key': _apiKey,
+      'language': _languaje,
+      'page': '1'
+    }   
+    );
+    var response = await http.get(url);
+
+    //final Map<String, dynamic> decodeData = json.decode( response.body );
+    final popularResponse = NowPlayingResponse.fromJson(response.body);
+
+    //print( nowPlayingResponse.results[0].title);
+    popularMovies = popularResponse.results;
+
+    notifyListeners();
   }
 }

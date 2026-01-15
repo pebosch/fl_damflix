@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 class NowPlayingResponse {
-    Dates dates;
+    //Dates dates;
     int page;
     List<Result> results;
     int totalPages;
     int totalResults;
 
     NowPlayingResponse({
-        required this.dates,
+        //required this.dates,
         required this.page,
         required this.results,
         required this.totalPages,
@@ -20,7 +20,7 @@ class NowPlayingResponse {
     String toJson() => json.encode(toMap());
 
     factory NowPlayingResponse.fromMap(Map<String, dynamic> json) => NowPlayingResponse(
-        dates: Dates.fromMap(json["dates"]),
+        //dates: Dates.fromMap(json["dates"]),
         page: json["page"],
         results: List<Result>.from(json["results"].map((x) => Result.fromMap(x))),
         totalPages: json["total_pages"],
@@ -28,7 +28,7 @@ class NowPlayingResponse {
     );
 
     Map<String, dynamic> toMap() => {
-        "dates": dates.toMap(),
+        //"dates": dates.toMap(),
         "page": page,
         "results": List<dynamic>.from(results.map((x) => x.toMap())),
         "total_pages": totalPages,
@@ -36,29 +36,29 @@ class NowPlayingResponse {
     };
 }
 
-class Dates {
-    DateTime maximum;
-    DateTime minimum;
+// class Dates {
+//     DateTime maximum;
+//     DateTime minimum;
 
-    Dates({
-        required this.maximum,
-        required this.minimum,
-    });
+//     Dates({
+//         required this.maximum,
+//         required this.minimum,
+//     });
 
-    factory Dates.fromJson(String str) => Dates.fromMap(json.decode(str));
+//     factory Dates.fromJson(String str) => Dates.fromMap(json.decode(str));
 
-    String toJson() => json.encode(toMap());
+//     String toJson() => json.encode(toMap());
 
-    factory Dates.fromMap(Map<String, dynamic> json) => Dates(
-        maximum: DateTime.parse(json["maximum"]),
-        minimum: DateTime.parse(json["minimum"]),
-    );
+//     factory Dates.fromMap(Map<String, dynamic> json) => Dates(
+//         maximum: DateTime.parse(json["maximum"]),
+//         minimum: DateTime.parse(json["minimum"]),
+//     );
 
-    Map<String, dynamic> toMap() => {
-        "maximum": "${maximum.year.toString().padLeft(4, '0')}-${maximum.month.toString().padLeft(2, '0')}-${maximum.day.toString().padLeft(2, '0')}",
-        "minimum": "${minimum.year.toString().padLeft(4, '0')}-${minimum.month.toString().padLeft(2, '0')}-${minimum.day.toString().padLeft(2, '0')}",
-    };
-}
+//     Map<String, dynamic> toMap() => {
+//         "maximum": "${maximum.year.toString().padLeft(4, '0')}-${maximum.month.toString().padLeft(2, '0')}-${maximum.day.toString().padLeft(2, '0')}",
+//         "minimum": "${minimum.year.toString().padLeft(4, '0')}-${minimum.month.toString().padLeft(2, '0')}-${minimum.day.toString().padLeft(2, '0')}",
+//     };
+// }
 
 class Result {
     bool adult;

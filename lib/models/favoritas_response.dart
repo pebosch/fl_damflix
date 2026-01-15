@@ -1,3 +1,5 @@
+// NO UTILIZADA EN ESTA IMPLEMENTACIÓN
+/*
 import 'dart:convert';
 
 class FavoritasResponse {
@@ -103,3 +105,4 @@ class Result {
         "vote_count": voteCount,
     };
 }
+*/
