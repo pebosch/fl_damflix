@@ -83,6 +83,13 @@ class Result {
       return 'https://i.stack.imgur.com/GNhxO.png';
     }
 
+    get fullBackDropImg {
+      if( this.posterPath !=null )
+        return 'https://image.tmdb.org/t/p/w500${ this.backdropPath }';
+      
+      return 'https://i.stack.imgur.com/GNhxO.png';
+    }
+
     Result({
         required this.adult,
         required this.backdropPath,

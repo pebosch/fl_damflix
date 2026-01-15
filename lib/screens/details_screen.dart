@@ -1,3 +1,4 @@
+import 'package:fl_damflix/models/models.dart';
 import 'package:fl_damflix/widgets/cast_carrousel.dart';
 import 'package:flutter/material.dart';
 
@@ -6,15 +7,19 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final Result movie = ModalRoute.of(context)!.settings.arguments as Result;
+    //print(movie.title);
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _CustomAppBar(),
+          _CustomAppBar(movie: movie,),
           SliverList(
             delegate: SliverChildListDelegate([
               //Text('Probandoooooo')
-              _InfoPelicula(),
-              _Overview(),
+              _InfoPelicula(movie: movie,),
+              _Overview(movie: movie,),
               CastCarrousel()
             ])
           )
@@ -25,7 +30,8 @@ class DetailsScreen extends StatelessWidget {
 }
 
 class _CustomAppBar extends StatelessWidget {
-  const _CustomAppBar({super.key});
+  final Result movie;
+  const _CustomAppBar({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +48,13 @@ class _CustomAppBar extends StatelessWidget {
           child: Container(
             width: double.infinity,
             color: Colors.white54,
-            child: Text('Titulo pelicula', textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),)
+            child: Text(movie.title, textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),)
           )
         ),
         centerTitle: true,
         background: FadeInImage(
           placeholder: AssetImage('assets/jar-loading.gif'), 
-          image: NetworkImage('https://pics.filmaffinity.com/star_wars_episode_v_the_empire_strikes_back-376120908-large.jpg')
+          image: NetworkImage(movie.fullBackDropImg)
         ),
       ),
     );
@@ -56,7 +62,8 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _InfoPelicula extends StatelessWidget {
-  const _InfoPelicula({super.key});
+  final Result movie;
+  const _InfoPelicula({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -69,27 +76,29 @@ class _InfoPelicula extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
               placeholder: AssetImage('assets/no-image.jpg'), 
-              image: NetworkImage('https://pics.filmaffinity.com/star_wars_episode_v_the_empire_strikes_back-701818523-large.jpg'),
+              image: NetworkImage(movie.fullPosterImg),
               height: 150,
             ),
           ),
 
           SizedBox( width: 20,),
 
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('movie.title', style: Theme.of(context).textTheme.headlineMedium, overflow: TextOverflow.ellipsis, maxLines: 2,),
-              Text('movie.year', style: Theme.of(context).textTheme.headlineSmall, overflow: TextOverflow.ellipsis, maxLines: 1,),
-
-              Row(
-                children: [
-                  Icon(Icons.star_half, size: 30, color: Colors.orange,),
-                  Text('movie.rate', style: Theme.of(context).textTheme.headlineSmall, overflow: TextOverflow.ellipsis, maxLines: 1,),
-                ],
-                )
-
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(movie.title, style: TextStyle(fontSize: 20), overflow: TextOverflow.ellipsis, maxLines: 2,),
+                Text(movie.releaseDate.year.toString(), style: TextStyle(fontSize: 15), overflow: TextOverflow.ellipsis, maxLines: 1,),
+            
+                Row(
+                  children: [
+                    Icon(Icons.star_half, size: 30, color: Colors.orange,),
+                    Text(movie.voteAverage.toString(), style: Theme.of(context).textTheme.headlineSmall, overflow: TextOverflow.ellipsis, maxLines: 1,),
+                  ],
+                  )
+            
+              ],
+            ),
           )
         ],
       ),
@@ -99,14 +108,15 @@ class _InfoPelicula extends StatelessWidget {
 }
 
 class _Overview extends StatelessWidget {
-  const _Overview({super.key});
+  final Result movie;
+  const _Overview({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20),
       child: Text(
-        'movie.description. Id excepteur consequat nisi irure excepteur amet proident dolor nisi quis sunt est voluptate. Officia id ad reprehenderit culpa deserunt. Consequat culpa anim sint id irure laborum anim. Nostrud sit deserunt culpa ex aute reprehenderit qui laboris excepteur quis occaecat adipisicing.',
+        movie.overview,
         textAlign: TextAlign.justify,
       ),
     );
