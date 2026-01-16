@@ -1,3 +1,4 @@
+import 'package:fl_damflix/providers/actors_provider.dart';
 import 'package:fl_damflix/providers/movies_provider.dart';
 import 'package:fl_damflix/screens/screens.dart';
 import 'package:fl_damflix/theme/app_theme.dart';
@@ -13,7 +14,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create:(context) => MoviesProvider(), lazy: false,)
+        ChangeNotifierProvider(create:(context) => MoviesProvider(), lazy: false,),
+        ChangeNotifierProvider(create:(context) => ActorsProvider(), lazy: false,)
       ],
       child: MyApp(),
     );

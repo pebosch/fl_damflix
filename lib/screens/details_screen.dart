@@ -1,30 +1,33 @@
 import 'package:fl_damflix/models/models.dart';
+import 'package:fl_damflix/providers/actors_provider.dart';
 import 'package:fl_damflix/widgets/cast_carrousel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     final Result movie = ModalRoute.of(context)!.settings.arguments as Result;
     //print(movie.title);
+    final actorsProvider = Provider.of<ActorsProvider>(context);
+    actorsProvider.getOnDisplayActors(movie.id);
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _CustomAppBar(movie: movie,),
+          _CustomAppBar(movie: movie),
           SliverList(
             delegate: SliverChildListDelegate([
               //Text('Probandoooooo')
-              _InfoPelicula(movie: movie,),
-              _Overview(movie: movie,),
-              CastCarrousel()
-            ])
-          )
+              _InfoPelicula(movie: movie),
+              _Overview(movie: movie),
+              CastCarrousel(actorsProvider: actorsProvider,),
+            ]),
+          ),
         ],
-      )
+      ),
     );
   }
 }
@@ -48,13 +51,21 @@ class _CustomAppBar extends StatelessWidget {
           child: Container(
             width: double.infinity,
             color: Colors.white54,
-            child: Text(movie.title, textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),)
-          )
+            child: Text(
+              movie.title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ),
         centerTitle: true,
         background: FadeInImage(
-          placeholder: AssetImage('assets/jar-loading.gif'), 
-          image: NetworkImage(movie.fullBackDropImg)
+          placeholder: AssetImage('assets/jar-loading.gif'),
+          image: NetworkImage(movie.fullBackDropImg),
         ),
       ),
     );
@@ -68,41 +79,54 @@ class _InfoPelicula extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only( top: 20),
-      padding: EdgeInsets.symmetric( horizontal: 20),
+      margin: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
-              placeholder: AssetImage('assets/no-image.jpg'), 
+              placeholder: AssetImage('assets/no-image.jpg'),
               image: NetworkImage(movie.fullPosterImg),
               height: 150,
             ),
           ),
 
-          SizedBox( width: 20,),
+          SizedBox(width: 20),
 
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(movie.title, style: TextStyle(fontSize: 20), overflow: TextOverflow.ellipsis, maxLines: 2,),
-                Text(movie.releaseDate.year.toString(), style: TextStyle(fontSize: 15), overflow: TextOverflow.ellipsis, maxLines: 1,),
-            
+                Text(
+                  movie.title,
+                  style: TextStyle(fontSize: 20),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+                Text(
+                  movie.releaseDate.year.toString(),
+                  style: TextStyle(fontSize: 15),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+
                 Row(
                   children: [
-                    Icon(Icons.star_half, size: 30, color: Colors.orange,),
-                    Text(movie.voteAverage.toString(), style: Theme.of(context).textTheme.headlineSmall, overflow: TextOverflow.ellipsis, maxLines: 1,),
+                    Icon(Icons.star_half, size: 30, color: Colors.orange),
+                    Text(
+                      movie.voteAverage.toString(),
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                   ],
-                  )
-            
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
-
     );
   }
 }
@@ -115,10 +139,7 @@ class _Overview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20),
-      child: Text(
-        movie.overview,
-        textAlign: TextAlign.justify,
-      ),
+      child: Text(movie.overview, textAlign: TextAlign.justify),
     );
   }
 }
