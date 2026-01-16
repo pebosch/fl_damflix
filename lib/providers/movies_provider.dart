@@ -18,6 +18,8 @@ List <Result> popularMovies = [];
     this.getOnDisplayMovies();
     this.getPopularMovies();
   }
+  
+  
 
   getOnDisplayMovies() async {
     var url = Uri.https(_baseUrl, '/3/movie/now_playing', {
@@ -54,5 +56,21 @@ List <Result> popularMovies = [];
     popularMovies = popularResponse.results;
 
     notifyListeners();
+  }
+  getCredits(int movie_id) async {
+    var url = Uri.https(_baseUrl, '/3/movie/$movie_id/credits', {
+      'api_key': _apiKey,
+      'language': _languaje,
+      'page': '1'
+    }   
+    );
+    var response = await http.get(url);
+
+    final creditsResponse = CreditsResponse.fromJson(response.body as Map<String, dynamic>);
+
+    return creditsResponse.cast;
+
+   
+
   }
 }
