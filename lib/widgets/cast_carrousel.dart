@@ -1,12 +1,10 @@
-import 'package:fl_damflix/models/credits_response.dart';
 import 'package:flutter/material.dart';
 
 class CastCarrousel extends StatelessWidget {
   const CastCarrousel({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
-    final Cast cast = ModalRoute.of(context)!.settings.arguments as Cast;
     return Container(
       width: double.infinity,
       height: 150,
@@ -15,7 +13,7 @@ class CastCarrousel extends StatelessWidget {
         itemCount: 10,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
-          return _CastCard(cast: cast);
+          return _CastCard();
         }
       ),
     );
@@ -23,8 +21,8 @@ class CastCarrousel extends StatelessWidget {
 }
 
 class _CastCard extends StatelessWidget {
-  const _CastCard({super.key,required this.cast});
-  final Cast cast;
+  const _CastCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +37,7 @@ class _CastCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
               placeholder: AssetImage('assets/no-image.jpg'), 
-              image: NetworkImage('${cast.fullProfilePath}'),
+              image: NetworkImage('https://hips.hearstapps.com/hmg-prod/images/harrison-ford-joven-658b217b0e4eb.jpg'),
               height: 100,
               width: 80,
               fit: BoxFit.cover
@@ -47,7 +45,7 @@ class _CastCard extends StatelessWidget {
           ),
 
           Text(
-            '${cast.name}',
+            'actor.name Harrison Ford',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
